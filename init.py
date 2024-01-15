@@ -1,11 +1,11 @@
-# Example file showing a basic pygame "game loop"
 import pygame
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((720, 1080))
 clock = pygame.time.Clock()
 running = True
+x, y = 50, 50
 
 while running:
     # poll for events
@@ -13,11 +13,17 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+    
+    # Get the mouse position
+    mouseX, mouseY = pygame.mouse.get_pos()
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    # Check if the left mouse button is pressed
+    if pygame.mouse.get_pressed()[0]:
+        x, y = mouseX, mouseY
 
-    # RENDER YOUR GAME HERE
+    screen.fill((0, 0, 0))  # Fill the window with black
+    pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))  # Draw a red rectangle
+
 
     # flip() the display to put your work on screen
     pygame.display.flip()

@@ -22,7 +22,7 @@ while running:
         x, y = mouseX, mouseY
 
     screen.fill((0, 0, 0))  # Fill the window with black
-    pygame.draw.rect(screen, (255, 0, 0), (x, y, 50, 50))  # Draw a red rectangle
+    pygame.draw.rect(screen, (255, 0, 0), (x, y, 5, 5))  # Draw a red rectangle
 
 
     # flip() the display to put your work on screen

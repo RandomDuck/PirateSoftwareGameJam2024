@@ -1,5 +1,5 @@
 import pygame
-import text as txt
+from .text import Text
 
 class Button: # Renders a button with text
   def __init__(self, position, size, color):
@@ -13,9 +13,9 @@ class Button: # Renders a button with text
     pygame.draw.rect(surface, self.button_color, self.button_rect)
 
 class TextButton(Button): # Renders a button with text
-  def __init__(self, position, text, size, color, text_color):
+  def __init__(self, position, text, size, color, text_color, center):
     super().__init__(position, size, color)
-    self.text_obj = txt.Text(position, text, text_color, True)
+    self.text_obj = Text(position, size, text, text_color, center)
 
   def render(self, surface):
     super().render(surface)

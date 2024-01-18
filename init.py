@@ -8,6 +8,8 @@ clock = pygame.time.Clock()
 running = True
 x, y = 50, 50
 
+button = btn.TextButton((20,20), "Hello world", (screen.get_rect().width-40,50), ((255,255,255),(255,127,127)), (255,0,0), (True, True))
+
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -23,7 +25,6 @@ while running:
         x, y = mouseX, mouseY
 
     screen.fill((0, 0, 0))  # Fill the window with black
-    button = btn.TextButton((20,20), "Hello world", (screen.get_rect().width-40,50), (255,255,255), (255,0,0), (True, True))
     button.render(screen)
     pygame.draw.rect(screen, (255, 0, 0), (x, y, 5, 5))  # Draw a red rectangle
 

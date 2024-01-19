@@ -10,7 +10,9 @@ class UiController:
     self.buttons = []
 
   def setup(self):
-    self.buttons.append(TextButton((20,20), "Hello world", (self.width-40,50), ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
+    self.buttons.append(TextButton((20,self.height - 70), "Profile", ((self.width / 3)-20,50), ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
+    self.buttons.append(TextButton(((self.width/3) + 10,self.height - 70), "Quacker", ((self.width / 3)-20,50), ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
+    self.buttons.append(TextButton(((self.width/3) * 2,self.height - 70), "Store", ((self.width / 3)-20,50), ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
 
   def render(self, events):
     screen = self.screen

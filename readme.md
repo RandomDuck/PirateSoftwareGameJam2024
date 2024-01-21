@@ -25,6 +25,11 @@ The game immerses players in the fast-paced realm of digital influence, where th
 https://docs.google.com/document/d/1DdAQhDmKEiPBwfdhL5Y19IfBzhBwmb6PK8SvPd6PY5w/edit?usp=sharing
 
 ### Info
+<p>
 This is a game made for Pirate Softwares 2024 game jam.
 It uses pygame as a game engine.
 Thanks to Thor for hosting this awesome jam and thanks to you for being here.
+</p>
+
+#### Special thanks to:
+* ReelablePenny14 in the PiratSoftware discord for his help with button layout positions

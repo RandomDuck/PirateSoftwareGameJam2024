@@ -58,8 +58,7 @@ class Settings:
   def getAspect(self):
     return self.options["aspect"].getRatio()
   
-  def update(self, screen):
-    self.screen = screen
+  def update(self):
     rect = self.screen.get_rect()
     self.window_width = rect.width
     self.window_height = rect.height

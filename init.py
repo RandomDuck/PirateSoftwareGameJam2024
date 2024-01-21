@@ -27,10 +27,7 @@ def setup():
   icon_image = pygame.image.load(image_path)
   icon_surface = pygame.Surface((32, 32), pygame.SRCALPHA)
   icon_image = pygame.transform.scale(icon_image, (32, 32))
-  mask = pygame.Surface((32, 32), pygame.SRCALPHA)
-  pygame.draw.circle(mask, (255, 255, 255, 255), (16, 16), 16)
-  icon_surface.blit(icon_image, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
-  icon_surface.blit(mask, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+  icon_surface.blit(icon_image, (0, 0))
   pygame.display.set_icon(icon_surface)
 
   # Setup controllers
@@ -47,6 +44,7 @@ def hande_options():
   global aspect
   if aspect != newAspect:
       aspect = newAspect
+      pygame.display.set_mode(aspect)
       update()
 
 setup()

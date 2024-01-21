@@ -9,16 +9,19 @@ class UiController:
     self.height = rect.height
     self.sizeY = 50 
     self.buttons = []
+    self.playableArea = ((10,50), (self.width - 20, self.height - 130))
 
   def setup(self):
     (pos, size) = self.calcBottomButtonPosNSize(4, 20, 20, 10)
-    self.buttons.append(TextButton(pos[0], "Profile", size[0], ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
-    self.buttons.append(TextButton(pos[1], "Quacker", size[1], ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
-    self.buttons.append(TextButton(pos[2], "News", size[2], ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
-    self.buttons.append(TextButton(pos[3], "Store", size[3], ((255,255,255),(255,127,127)), (255,0,0), (True, True)))
+    colors = ((220,220,220),(230,140,140))
+    self.buttons.append(TextButton(pos[0], "Profile", size[0], colors, (255,0,0), (True, True)))
+    self.buttons.append(TextButton(pos[1], "Quacker", size[1], colors, (255,0,0), (True, True)))
+    self.buttons.append(TextButton(pos[2], "News", size[2], colors, (255,0,0), (True, True)))
+    self.buttons.append(TextButton(pos[3], "Store", size[3], colors, (255,0,0), (True, True)))
 
   def render(self, events):
     screen = self.screen
+    pygame.draw.rect(screen, (255,255,255), self.playableArea)
     for button in self.buttons:
       button.render(screen, events)
 
@@ -26,6 +29,7 @@ class UiController:
     rect = self.screen.get_rect()
     self.width = rect.width
     self.height = rect.height
+    self.playableArea = ((10,50), (self.width - 20, self.height - 130))
     (pos, size) = self.calcBottomButtonPosNSize(len(self.buttons), 20, 20, 10)
     for index, button in enumerate(self.buttons):
       button.update(pos[index], size[index])
@@ -38,5 +42,5 @@ class UiController:
     for i in range(0, numOButtons):
       pos.append((cx, self.height - (offesty + self.sizeY)))
       size.append((wid, self.sizeY))
-      cx += (wid + padding) #Note this was stolen, this is mine now but used to belong to ReelablePenny14
+      cx += (wid + padding) # This is my original code, made only by me
     return (pos, size)

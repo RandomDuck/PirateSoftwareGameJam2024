@@ -1,14 +1,17 @@
 import pygame
 from scripts.ui_controller import UiController as UICon
+from scripts.modules.settings import Settings
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((720, 1080))
+aspect = (720, 1080)
+screen = pygame.display.set_mode(aspect)
 clock = pygame.time.Clock()
 running = True
 
 # Set variables
 UiController = UICon(screen)
+SettingCon = Settings(screen, (200,30), ((255,255,255),(127,255,127)), (0,0,255))
 
 # Event handleing
 def fetchEvents():
@@ -18,8 +21,33 @@ def fetchEvents():
   return events
 
 # Game setup
-def setup():  
+def setup():
+  # Set game icon
+  image_path = "resources/icon.jpg"
+  icon_image = pygame.image.load(image_path)
+  icon_surface = pygame.Surface((32, 32), pygame.SRCALPHA)
+  icon_image = pygame.transform.scale(icon_image, (32, 32))
+  mask = pygame.Surface((32, 32), pygame.SRCALPHA)
+  pygame.draw.circle(mask, (255, 255, 255, 255), (16, 16), 16)
+  icon_surface.blit(icon_image, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+  icon_surface.blit(mask, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+  pygame.display.set_icon(icon_surface)
+
+  # Setup controllers
   UiController.setup()
+  SettingCon.setup()
+
+def update():
+   UiController.update()
+   SettingCon.update()
+
+def hande_options():
+  # handle aspect ratio change
+  newAspect = SettingCon.getAspect()
+  global aspect
+  if aspect != newAspect:
+      aspect = newAspect
+      update()
 
 setup()
 while running:
@@ -29,11 +57,14 @@ while running:
     if pygame.QUIT in events:
         running = False
 
-    # Fill the window with black
-    screen.fill((0, 0, 0))
+    # check if we need to handle options
+    hande_options()
+    # Fill the window with teal
+    screen.fill((0, 100, 100))
 
     # Render game controllers
     UiController.render(events)
+    SettingCon.render(events)
 
     # flip() the display to put your work on screen
     pygame.display.flip()

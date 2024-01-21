@@ -25,6 +25,10 @@ class Text: #renders text on screen
       text_rect.topleft = self.pos
     surface.blit(text_surface, text_rect)
 
+  def update(self, pos, size):
+    self.size = size
+    self.pos = pos
+
 class TextBox(Text): #renders text on screen with a background
   def __init__(self, position, size, text, color, backgroundColor, center):
     super().__init__(position, size, text, color, center)
@@ -34,3 +38,7 @@ class TextBox(Text): #renders text on screen with a background
   def render (self, surface):
     pygame.draw.rect(surface, self.background_color, self.background_rect)
     super().render(surface)
+
+  def update(self, pos, size):
+    self.background_rect = pygame.Rect(pos[0], pos[1], size[0], size[1])  
+    super().update(pos, size)

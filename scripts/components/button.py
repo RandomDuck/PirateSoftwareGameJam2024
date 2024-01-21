@@ -8,7 +8,7 @@ class Button: # Renders a button with text
     self.button_rect = pygame.Rect(position[0], position[1], size[0], size[1])  
     self.button_color  = color #Expected data config: ((r,g,b),(r,g,b))
     self.callback = callback #Expected data config: function or null
-    self.pressed = False
+    self.toggled = False
 
   def render(self, surface, events):
     mouseX, mouseY = pygame.mouse.get_pos()
@@ -16,6 +16,15 @@ class Button: # Renders a button with text
     pygame.draw.rect(surface, self.button_color[1] if mouseIsHovering else self.button_color[0], self.button_rect)
     if pygame.MOUSEBUTTONUP in events and mouseIsHovering:
       self.callback()
+
+  def toggle(self):
+    self.button_color = (self.button_color[1], self.button_color[0])
+    self.toggled = not self.toggled
+
+  def update(self, pos, size):
+    self.pos = pos
+    self.size = size
+    self.button_rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
 
 
 class TextButton(Button): # Renders a button with text
@@ -27,6 +36,12 @@ class TextButton(Button): # Renders a button with text
     super().render(surface, events)
     self.text_obj.render(surface)
 
+  def changeText(self, newText):
+    self.text_obj.text = newText
+
+  def update(self, pos, size):
+    super().update(pos, size)
+    self.text_obj.update(pos, size)
 
 class IconButton(Button): # Renders a button with an icon
   def __init__(self, iconPath, position, size, color, callback = lambda:print("clicked icon button")):

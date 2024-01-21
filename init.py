@@ -11,7 +11,8 @@ running = True
 
 # Set variables
 UiController = UICon(screen)
-SettingCon = Settings(screen, (200,30), ((255,255,255),(127,255,127)), (0,0,255))
+settingCollors = ((160,160,160),(127,255,127))
+SettingCon = Settings(screen, (200,30), settingCollors, (0,0,255))
 
 # Event handleing
 def fetchEvents():

@@ -1,3 +1,4 @@
+import pygame
 from ..components.button import TextButton as btn
 
 class AspectButton:
@@ -37,15 +38,23 @@ class Settings:
     self.window_height = rect.height
     self.size = size
     self.pos = (self.window_width - (self.size[0]+10), 10)
+    self.CoverRect = pygame.Rect(self.pos[0]-5, self.pos[1]-5, size[0]+10, size[1]+10)  
     self.active = False
     self.button = None
     self.options = {}
+    
+  def getAspectPos(self):
+    return (self.pos[0]+5,self.size[1]+20), (self.size[0]-10, self.size[1])
 
   def setup(self):
     self.button = btn(self.pos, "Settings", self.size, self.color, self.text_color, (True, True), self.toggle)
-    self.options["aspect"] = AspectButton(self.screen, (self.pos[0],self.size[1]+20), self.size, self.color, self.text_color)
+    aspectPos = self.getAspectPos()
+    self.options["aspect"] = AspectButton(self.screen, aspectPos[0], aspectPos[1], self.color, self.text_color)
+    self.CoverRect.height = (self.size[1] + 10) * (len(self.options) + 1)
   
   def render(self, events):
+    if self.active:
+      pygame.draw.rect(self.screen, (100,0,100), self.CoverRect)
     self.button.render(self.screen, events)
     if self.active:
       for option in self.options:
@@ -63,5 +72,8 @@ class Settings:
     self.window_width = rect.width
     self.window_height = rect.height
     self.pos = (self.window_width - (self.size[0]+10), 10)
+    self.CoverRect.x = self.pos[0]-5
+    self.CoverRect.y = self.pos[1]-5
     self.button.update(self.pos, self.size)
-    self.options["aspect"].update((self.pos[0],self.size[1]+20), self.size)
+    aspectPos = self.getAspectPos()
+    self.options["aspect"].update(aspectPos[0], aspectPos[1])

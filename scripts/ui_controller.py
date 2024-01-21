@@ -10,10 +10,11 @@ class UiController:
     self.sizeY = 50 
     self.buttons = []
     self.playableArea = ((10,50), (self.width - 20, self.height - 130))
+    self.clickable = True
 
   def setup(self):
     (pos, size) = self.calcBottomButtonPosNSize(4, 20, 20, 10)
-    colors = ((220,220,220),(230,140,140))
+    colors = ((220,220,220),(180,140,140))
     self.buttons.append(TextButton(pos[0], "Profile", size[0], colors, (255,0,0), (True, True)))
     self.buttons.append(TextButton(pos[1], "Quacker", size[1], colors, (255,0,0), (True, True)))
     self.buttons.append(TextButton(pos[2], "News", size[2], colors, (255,0,0), (True, True)))
@@ -21,9 +22,10 @@ class UiController:
 
   def render(self, events):
     screen = self.screen
+    availableEvents = events if self.clickable else []
     pygame.draw.rect(screen, (255,255,255), self.playableArea)
     for button in self.buttons:
-      button.render(screen, events)
+      button.render(screen, availableEvents)
 
   def update(self):
     rect = self.screen.get_rect()
@@ -44,3 +46,9 @@ class UiController:
       size.append((wid, self.sizeY))
       cx += (wid + padding) # This is my original code, made only by me
     return (pos, size)
+  
+  def toggleClickable(self, isClickable = None):
+    clickable = isClickable
+    if clickable == None:
+      clickable = not self.clickable
+    self.clickable = clickable

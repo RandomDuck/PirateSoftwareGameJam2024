@@ -38,5 +38,5 @@ class UiController:
     for i in range(0, numOButtons):
       pos.append((cx, self.height - (offesty + self.sizeY)))
       size.append((wid, self.sizeY))
-      cx += (wid + padding)
+      cx += (wid + padding) #Note this was stolen, this is mine now but used to belong to ReelablePenny14
     return (pos, size)

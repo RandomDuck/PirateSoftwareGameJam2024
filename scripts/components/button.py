@@ -19,7 +19,8 @@ class Button: # Renders a button with text
     if pygame.MOUSEBUTTONUP in events:
       if mouseIsHovering and self.downOnHover:
         self.callback()
-      self.downOnHover = False
+      if self.downOnHover:
+        self.downOnHover = False
     
     if pygame.MOUSEBUTTONDOWN in events and mouseIsHovering:
       self.downOnHover = True

@@ -1,20 +1,27 @@
 import pygame
 from ..components.button import TextButton as btn
 
-class AspectButton:
-  def __init__(self, screen, pos, size, color, text_color):
+class settingsButton:
+  def __init__(self, screen, pos, size, color, text_color, callback, text):
     self.screen = screen
     self.color = color
     self.text_color = text_color
     self.size = size
+    self.button = btn(pos, text, self.size, self.color, self.text_color, (True, True), callback)
+  
+  def render(self, events):
+    self.button.render(self.screen, events)
+
+  def update(self, pos, size):
+    self.button.update(pos, size)
+
+class AspectButton(settingsButton):
+  def __init__(self, screen, pos, size, color, text_color):
     self.ratio_text = ["S","M","L"]
     self.ratios = [(560,840), (720,1080), (800,1200)]
     self.select_ratio = 0
     self.defaultText = "Screensize:"
-    self.button = btn(pos, f'{self.defaultText} {self.ratio_text[self.select_ratio]}', self.size, self.color, self.text_color, (True, True), self.toggleRatio)
-
-  def render(self, events):
-    self.button.render(self.screen, events)
+    super().__init__(screen, pos, size, color, text_color, self.toggleRatio, f'{self.defaultText} {self.ratio_text[self.select_ratio]}')
 
   def toggleRatio(self):
     self.select_ratio += 1
@@ -25,8 +32,20 @@ class AspectButton:
   def getRatio(self):
     return self.ratios[self.select_ratio]
   
-  def update(self, pos, size):
-    self.button.update(pos, size)
+class SaveButton(settingsButton):
+  def __init__(self, screen, pos, size, color, text_color):
+    super().__init__(screen, pos, size, color, text_color, self.SaveGame, f'Save')
+
+  def SaveGame(self):
+    pass # TODO: add way to save game
+
+class QuitButton(settingsButton):
+  def __init__(self, screen, pos, size, color, text_color):
+    super().__init__(screen, pos, size, color, text_color, self.Quit, f'Quit')
+
+  def Quit(self):
+    # TODO: Save game on quit
+    pygame.event.post(pygame.event.Event(pygame.QUIT))
   
 class Settings:
   def __init__(self, screen, size, color, text_color, toggleCB = lambda:""):
@@ -44,22 +63,29 @@ class Settings:
     self.button = None
     self.options = {}
     
-  def getAspectPos(self):
-    return (self.pos[0]+5,self.size[1]+20), (self.size[0]-10, self.size[1])
+  def getButtonsPos(self):
+    pos = []
+    lasty = (self.size[1]+20)
+    for i in range(0, 3):
+      pos.append(((self.pos[0]+5),lasty))
+      lasty += (self.size[1]+10)
+    return (pos, (self.size[0]-10, self.size[1]))
 
   def setup(self):
     self.button = btn(self.pos, "Settings", self.size, self.color, self.text_color, (True, True), self.toggle)
-    aspectPos = self.getAspectPos()
-    self.options["aspect"] = AspectButton(self.screen, aspectPos[0], aspectPos[1], self.color, self.text_color)
+    (pos, size) = self.getButtonsPos()
+    print(pos)
+    self.options["aspect"] = AspectButton(self.screen, pos[0], size, self.color, self.text_color)
+    self.options["save"] = SaveButton(self.screen, pos[1], size, self.color, self.text_color)
+    self.options["quit"] = QuitButton(self.screen, pos[2], size, self.color, self.text_color)
     self.CoverRect.height = (self.size[1] + 10) * (len(self.options) + 1)
   
   def render(self, events):
     if self.active:
       pygame.draw.rect(self.screen, (100,0,100), self.CoverRect)
-    self.button.render(self.screen, events)
-    if self.active:
       for option in self.options:
         self.options[option].render(events)
+    self.button.render(self.screen, events)
 
   def toggle(self):
     self.toggleCB()
@@ -77,5 +103,7 @@ class Settings:
     self.CoverRect.x = self.pos[0]-5
     self.CoverRect.y = self.pos[1]-5
     self.button.update(self.pos, self.size)
-    aspectPos = self.getAspectPos()
-    self.options["aspect"].update(aspectPos[0], aspectPos[1])
+    (pos, size) = self.getButtonsPos()
+    self.options["aspect"].update(pos[0], size)
+    self.options["save"].update(pos[1], size)
+    self.options["quit"].update(pos[2], size)

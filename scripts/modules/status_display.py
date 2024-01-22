@@ -16,16 +16,16 @@ class Status:
   def setup(self):
     (pos, size) = self.calcTextPosNSize(3, self.pos, self.size, 5)
     (textColor, backgroundColor) = ((255,255,255), (90,90,90))
-    textsize = 20
+    textsize = 22
     textCentering = (True, False)
-    self.moral = Tb(pos[0], size[0], f'moral: {self.gameCon.getMorality()}', textColor, backgroundColor, textCentering, textsize)
-    self.cash = Tb(pos[1], size[1], f'cash: {self.gameCon.getCash()}', textColor, backgroundColor, textCentering, textsize)
-    self.cred = Tb(pos[2], size[2], f'cred: {self.gameCon.getCredibility()}', textColor, backgroundColor, textCentering, textsize)
+    self.moral = Tb(pos[0], size[0], f'Moral: {self.gameCon.getMorality()}', textColor, backgroundColor, textCentering, textsize)
+    self.cash = Tb(pos[1], size[1], f'Cash: {self.gameCon.getCash()}', textColor, backgroundColor, textCentering, textsize)
+    self.cred = Tb(pos[2], size[2], f'Cred: {self.gameCon.getCredibility()}', textColor, backgroundColor, textCentering, textsize)
   
   def updateText(self):
-    self.moral.text = f'moral: {self.gameCon.getMorality()}'
-    self.cash.text = f'cash: {self.gameCon.getCash()}'
-    self.cred.text = f'cred: {self.gameCon.getCredibility()}'
+    self.moral.text = f'Moral: {self.gameCon.getMorality()}'
+    self.cash.text = f'Cash: {self.gameCon.getCash()}'
+    self.cred.text = f'Cred: {self.gameCon.getCredibility()}'
   
   def update(self, pos, size):
     self.pos = pos

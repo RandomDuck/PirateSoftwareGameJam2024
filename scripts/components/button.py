@@ -35,7 +35,6 @@ class Button: # Renders a button with text
     self.size = size
     self.button_rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
 
-
 class TextButton(Button): # Renders a button with text
   def __init__(self, position, text, size, color, text_color, center, callback = lambda:print("clicked text button")):
     super().__init__(position, size, color, callback)

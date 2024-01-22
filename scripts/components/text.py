@@ -1,8 +1,8 @@
 import pygame
 
 class Text: #renders text on screen
-  def __init__(self, position, size, text, color, center):
-    self.font = pygame.font.Font(None, 36)
+  def __init__(self, position, size, text, color, center, texsize = 36):
+    self.font = pygame.font.Font(None, texsize)
     self.text = text
     self.size = size
     self.text_color = color
@@ -30,8 +30,8 @@ class Text: #renders text on screen
     self.pos = pos
 
 class TextBox(Text): #renders text on screen with a background
-  def __init__(self, position, size, text, color, backgroundColor, center):
-    super().__init__(position, size, text, color, center)
+  def __init__(self, position, size, text, color, backgroundColor, center, texsize = 36):
+    super().__init__(position, size, text, color, center, texsize)
     self.background_rect = pygame.Rect(position[0], position[1], size[0], size[1])  
     self.background_color  = backgroundColor 
   

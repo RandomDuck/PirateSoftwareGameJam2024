@@ -1,5 +1,6 @@
 import pygame
 from scripts.ui_controller import UiController as UICon
+from scripts.game_controller import GameCon
 from scripts.modules.settings import Settings
 
 # pygame setup
@@ -10,7 +11,8 @@ clock = pygame.time.Clock()
 running = True
 
 # Set variables
-UiController = UICon(screen)
+gameCon = GameCon()
+UiController = UICon(screen, gameCon)
 settingCollors = ((160,160,160),(127,255,127))
 SettingCon = Settings(screen, (200,30), settingCollors, (0,0,255))
 

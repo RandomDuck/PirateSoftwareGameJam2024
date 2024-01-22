@@ -49,6 +49,7 @@ while running:
     events = fetchEvents()
     # pygame.QUIT event means the user clicked X to close your window
     if pygame.QUIT in events:
+        # TODO: save game here too
         running = False
 
     # check if we need to handle options

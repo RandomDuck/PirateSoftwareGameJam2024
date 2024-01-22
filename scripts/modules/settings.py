@@ -29,7 +29,8 @@ class AspectButton:
     self.button.update(pos, size)
   
 class Settings:
-  def __init__(self, screen, size, color, text_color):
+  def __init__(self, screen, size, color, text_color, toggleCB = lambda:""):
+    self.toggleCB = toggleCB
     self.screen = screen
     self.color = color
     self.text_color = text_color
@@ -61,6 +62,7 @@ class Settings:
         self.options[option].render(events)
 
   def toggle(self):
+    self.toggleCB()
     self.active = not self.active
     self.button.toggle()
 

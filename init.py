@@ -15,7 +15,7 @@ running = True
 gameCon = GameCon()
 UiController = UICon(screen, gameCon)
 settingCollors = ((160,160,160),(127,255,127))
-SettingCon = Settings(screen, (200,30), settingCollors, (0,0,255))
+SettingCon = Settings(screen, (200,30), settingCollors, (0,0,255), UiController.setClickable)
 
 # Game setup
 def setup():

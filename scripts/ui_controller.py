@@ -27,21 +27,30 @@ class UiController:
 
   def render(self, events):
     screen = self.screen
+    
     # Ignore events if we cant be clicked
     availableEvents = events if self.clickable else []
+    
     # render playable area
     pygame.draw.rect(screen, (255,255,255), self.playableArea)
+    if not self.clickable:
+      pygame.draw.rect(screen, pygame.Color(20,20,20,120), self.playableArea)
+    
     # render bottom row buttons
     for button in self.buttons:
       button.render(screen, availableEvents)
+    
+    # render stats hud
     self.statDisplay.render(screen)
 
   def update(self):
     rect = self.screen.get_rect()
     self.width = rect.width
     self.height = rect.height
+    
     # update playable area scale and pos
     self.playableArea = ((10,50), (self.width - 20, self.height - 130))
+
     # update bottom row buttons scale and pos
     (pos, size) = self.calcBottomButtonPosNSize(len(self.buttons), 20, 20, 10)
     for index, button in enumerate(self.buttons):

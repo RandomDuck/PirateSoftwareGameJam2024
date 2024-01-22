@@ -1,5 +1,6 @@
 import pygame
 from .text import Text
+from .icon import Icon
 
 class Button: # Renders a button with text
   def __init__(self, position, size, color, callback = lambda:print("clicked button")):
@@ -52,11 +53,15 @@ class TextButton(Button): # Renders a button with text
     self.text_obj.update(pos, size)
 
 class IconButton(Button): # Renders a button with an icon
-  def __init__(self, iconPath, position, size, color, callback = lambda:print("clicked icon button")):
+  def __init__(self, iconPath, position, size, color, padding = 15, callback = lambda:print("clicked icon button")):
     super().__init__(position, size, color, callback)
-    icon = pygame.image.load(iconPath)
-    self.icon = pygame.transform.scale(icon, (50, 50))
+    spadding = padding*2
+    self.icon = Icon(iconPath, (position[0] + padding, position[1] + padding), (size[0] - spadding, size[1] - spadding))
 
   def render(self, surface, events):
     super().render(surface, events)
-    surface.blit(self.icon, (self.button_rect.x, self.button_rect.y,))
+    self.icon.render(surface)
+
+  def update(self, pos, size):
+    super().update(pos, size)
+    self.icon.update(pos, size)

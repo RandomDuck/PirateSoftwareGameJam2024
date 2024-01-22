@@ -54,8 +54,11 @@ class TextButton(Button): # Renders a button with text
 class IconButton(Button): # Renders a button with an icon
   def __init__(self, iconPath, position, size, color, padding = 15, callback = lambda:print("clicked icon button")):
     super().__init__(position, size, color, callback)
-    spadding = padding*2
-    self.icon = Icon(iconPath, (position[0] + padding, position[1] + padding), (size[0] - spadding, size[1] - spadding))
+    self.padding = padding
+    spadding = self.padding*2
+    iconP = (position[0] + padding, position[1] + padding)
+    iconS = (size[0] - spadding, size[1] - spadding)
+    self.icon = Icon(iconPath, iconP, iconS)
 
   def render(self, surface, events):
     super().render(surface, events)
@@ -63,4 +66,7 @@ class IconButton(Button): # Renders a button with an icon
 
   def update(self, pos, size):
     super().update(pos, size)
-    self.icon.update(pos, size)
+    spadding = self.padding*2
+    iconP = (pos[0] + self.padding, pos[1] + self.padding)
+    iconS = (size[0] - spadding, size[1] - spadding)
+    self.icon.update(iconP, iconS)

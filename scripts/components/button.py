@@ -9,13 +9,20 @@ class Button: # Renders a button with text
     self.button_color  = color #Expected data config: ((r,g,b),(r,g,b))
     self.callback = callback #Expected data config: function or null
     self.toggled = False
+    self.downOnHover = False
 
   def render(self, surface, events):
     mouseX, mouseY = pygame.mouse.get_pos()
     mouseIsHovering = (mouseX >= self.pos[0] and mouseX <= (self.pos[0] + self.size[0])) and (mouseY >= self.pos[1] and mouseY <= (self.pos[1] + self.size[1]))
     pygame.draw.rect(surface, self.button_color[1] if mouseIsHovering else self.button_color[0], self.button_rect)
-    if pygame.MOUSEBUTTONUP in events and mouseIsHovering:
-      self.callback()
+    
+    if pygame.MOUSEBUTTONUP in events:
+      if mouseIsHovering and self.downOnHover:
+        self.callback()
+      self.downOnHover = False
+    
+    if pygame.MOUSEBUTTONDOWN in events and mouseIsHovering:
+      self.downOnHover = True
 
   def toggle(self):
     self.button_color = (self.button_color[1], self.button_color[0])

@@ -2,7 +2,7 @@ import pygame
 from scripts.ui_controller import UiController as UICon
 from scripts.game_controller import GameCon
 from scripts.modules.settings import Settings
-from scripts.components.utils import setGameIcon, fetchEvents, setGameName
+from scripts.components.utils import setGameIcon, fetchEvents, setGameName, SplashScreen
 
 # pygame setup
 pygame.init()
@@ -12,6 +12,7 @@ clock = pygame.time.Clock()
 running = True
 
 # Set globals
+SplScr = SplashScreen(screen, 2)
 gameCon = GameCon()
 UiController = UICon(screen, gameCon)
 settingCollors = ((160,160,160),(127,255,127))
@@ -30,6 +31,8 @@ def setup():
 def update():
    UiController.update()
    SettingCon.update()
+   if SplScr.shouldDisplaySplash():
+      SplScr.update()
 
 def hande_options():
   # handle aspect ratio change
@@ -56,6 +59,10 @@ while running:
     # Render game controllers
     UiController.render(events)
     SettingCon.render(events)
+
+    # Render splash screen
+    if SplScr.shouldDisplaySplash():
+      SplScr.render()
 
     # flip() the display to put your work on screen
     pygame.display.flip()

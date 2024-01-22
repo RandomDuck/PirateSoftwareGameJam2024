@@ -23,7 +23,8 @@ def setGameIcon():
   pygame.display.set_icon(image_surface)
 
 def setGameName():
-  pass
+   title = 'Viral Hysteria'
+   pygame.display.set_caption(title, title)
 
 # Event handleing
 def fetchEvents():

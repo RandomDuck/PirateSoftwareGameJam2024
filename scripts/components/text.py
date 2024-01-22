@@ -16,8 +16,8 @@ class Text: #renders text on screen
       if self.center[1]:
         text_rect.center = ((self.size[0] // 2) + self.pos[0], (self.size[1] // 2) + self.pos[1])
       else:
-        text_rect.centery = (self.size[0] // 2) + self.pos[1]
-        text_rect.left = self.pos[1]
+        text_rect.centery = (self.size[1] // 2) + self.pos[1]
+        text_rect.left = self.pos[0]
     elif self.center[1]:
       text_rect.centerx = (self.size[0] // 2) + self.pos[0]
       text_rect.top = self.pos[1]

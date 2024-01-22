@@ -17,9 +17,10 @@ class Status:
     (pos, size) = self.calcTextPosNSize(3, self.pos, self.size, 5)
     (textColor, backgroundColor) = ((255,255,255), (90,90,90))
     textsize = 20
-    self.moral = Tb(pos[0], size[0], f'moral: {self.gameCon.getMorality()}', textColor, backgroundColor, (True,True), textsize)
-    self.cash = Tb(pos[1], size[1], f'cash: {self.gameCon.getCash()}', textColor, backgroundColor, (True,True), textsize)
-    self.cred = Tb(pos[2], size[2], f'cred: {self.gameCon.getCredibility()}', textColor, backgroundColor, (True,True), textsize)
+    textCentering = (True, False)
+    self.moral = Tb(pos[0], size[0], f'moral: {self.gameCon.getMorality()}', textColor, backgroundColor, textCentering, textsize)
+    self.cash = Tb(pos[1], size[1], f'cash: {self.gameCon.getCash()}', textColor, backgroundColor, textCentering, textsize)
+    self.cred = Tb(pos[2], size[2], f'cred: {self.gameCon.getCredibility()}', textColor, backgroundColor, textCentering, textsize)
   
   def updateText(self):
     self.moral.text = f'moral: {self.gameCon.getMorality()}'

@@ -15,7 +15,7 @@ class Status:
   
   def setup(self):
     (pos, size) = self.calcTextPosNSize(3, self.pos, self.size, 5)
-    (textColor, backgroundColor) = ((255,255,255), (90,90,90))
+    (textColor, backgroundColor) = ((255,255,255), (130,90,130))
     textsize = 22
     textCentering = (True, False)
     self.moral = Tb(pos[0], size[0], f'Moral: {self.gameCon.getMorality()}', textColor, backgroundColor, textCentering, textsize)

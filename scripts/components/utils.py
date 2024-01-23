@@ -2,7 +2,7 @@ import pygame
 
 def setGameIcon():
   # Set game icon
-  image_path = "resources/icon.jpg"
+  image_path = "resources/icon.png"
   image_width, image_height = (128,128)
   icon_image = pygame.image.load(image_path)
   icon_image = pygame.transform.scale(icon_image, (image_width,image_height))

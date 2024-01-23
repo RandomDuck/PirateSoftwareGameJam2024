@@ -16,7 +16,8 @@ class UiController:
     self.sizeY = 50 
     self.buttons = []
     self.playableArea = ((10,50), (self.width - 20, self.height - 130))
-    self.playableAreaScreen = pygame.surface(self.playableArea[1])
+    self.overlay = pygame.Surface(self.playableArea[1], pygame.SRCALPHA)
+    self.overlay.fill((0, 0, 0, 128))
     self.clickable = True
     self.statDisplay = None
     self.pageTarget = 0
@@ -26,17 +27,17 @@ class UiController:
     # Settup bottom row buttons
     (pos, size) = self.calcBottomButtonPosNSize(4, 20, 20, 10)
     colors = ((220,220,220),(180,140,140))
-    self.buttons.append(TextButton(pos[0], "Profile", size[0], colors, (255,0,0), (True, True), self.setTarget(0)))
-    self.buttons.append(TextButton(pos[1], "Quacker", size[1], colors, (255,0,0), (True, True), self.setTarget(1)))
-    self.buttons.append(TextButton(pos[2], "News", size[2], colors, (255,0,0), (True, True), self.setTarget(2)))
-    self.buttons.append(TextButton(pos[3], "Store", size[3], colors, (255,0,0), (True, True), self.setTarget(3)))
+    self.buttons.append(TextButton(pos[0], "Profile", size[0], colors, (255,0,0), (True, True), lambda:self.setTarget(0)))
+    self.buttons.append(TextButton(pos[1], "Quacker", size[1], colors, (255,0,0), (True, True), lambda:self.setTarget(1)))
+    self.buttons.append(TextButton(pos[2], "News", size[2], colors, (255,0,0), (True, True), lambda:self.setTarget(2)))
+    self.buttons.append(TextButton(pos[3], "Store", size[3], colors, (255,0,0), (True, True), lambda:self.setTarget(3)))
     # Setup status display
     self.statDisplay = Status(self.gameCon, (10,10), (320,30))
     # Setup pages
-    self.pages.append(ProfilePage(self.playableAreaScreen))
-    self.pages.append(Quacker(self.playableAreaScreen))
-    self.pages.append(News(self.playableAreaScreen))
-    self.pages.append(Store(self.playableAreaScreen))
+    self.pages.append(ProfilePage(self.screen, self.playableArea))
+    self.pages.append(Quacker(self.screen, self.playableArea))
+    self.pages.append(News(self.screen, self.playableArea))
+    self.pages.append(Store(self.screen, self.playableArea))
 
   def setTarget(self, target):
     self.pageTarget = target
@@ -49,15 +50,12 @@ class UiController:
     
     # render playable area
     pygame.draw.rect(screen, (255,255,255), self.playableArea)
-
-    # render current page
     self.pages[self.pageTarget].render(availableEvents)
-    screen.blit(self.playableAreaScreen, self.playableArea[0])
 
     # render area overlay
     if not self.clickable:
-      pygame.draw.rect(screen, pygame.Color(20,20,20,120), self.playableArea)
-    
+      screen.blit(self.overlay, self.playableArea[0])
+      
     # render bottom row buttons
     for button in self.buttons:
       button.render(screen, availableEvents)
@@ -72,7 +70,10 @@ class UiController:
     
     # update playable area scale and pos
     self.playableArea = ((10,50), (self.width - 20, self.height - 130))
-    pygame.transform.scale(self.playableAreaScreen, self.playableArea[1])
+    self.overlay = pygame.Surface(self.playableArea[1], pygame.SRCALPHA)
+    self.overlay.fill((0, 0, 0, 128))
+    for obj in self.pages:
+      obj.update(self.playableArea)
 
     # update bottom row buttons scale and pos
     (pos, size) = self.calcBottomButtonPosNSize(len(self.buttons), 20, 20, 10)

@@ -34,21 +34,21 @@ class AspectButton(settingsButton):
   
 class SaveButton(settingsButton):
   def __init__(self, screen, pos, size, color, text_color):
-    super().__init__(screen, pos, size, color, text_color, self.SaveGame, f'Save')
+    super().__init__(screen, pos, size, color, text_color, self.SaveGame, 'Save')
 
   def SaveGame(self):
     pass # TODO: add way to save game
 
 class ResetButton(settingsButton):
   def __init__(self, screen, pos, size, color, text_color):
-    super().__init__(screen, pos, size, color, text_color, self.ResetGame, f'Reset')
+    super().__init__(screen, pos, size, color, text_color, self.ResetGame, 'Reset')
 
   def ResetGame(self):
     pass # TODO: add way to reset game
 
 class QuitButton(settingsButton):
   def __init__(self, screen, pos, size, color, text_color):
-    super().__init__(screen, pos, size, color, text_color, self.Quit, f'Quit')
+    super().__init__(screen, pos, size, color, text_color, self.Quit, 'Quit')
 
   def Quit(self):
     # TODO: Save game on quit

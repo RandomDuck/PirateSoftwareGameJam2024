@@ -12,11 +12,11 @@ class GameCon:
     return self.credibility
 
   def updateCash(self, ammount):
-    self.cash + ammount
+    self.cash += ammount
   def updateMorality(self, ammount):
-    self.morality + ammount
+    self.morality += ammount
   def updateCredibility(self, ammount):
-    self.credibility + ammount
+    self.credibility += ammount
 
   def setCash(self, value):
     self.cash = value

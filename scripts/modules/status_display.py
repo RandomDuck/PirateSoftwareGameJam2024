@@ -8,6 +8,7 @@ class Status:
     self.setup()
   
   def render(self, surface):
+    self.updateText()
     self.moral.render(surface)
     self.cash.render(surface)
     self.cred.render(surface)

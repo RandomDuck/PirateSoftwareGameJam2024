@@ -31,13 +31,15 @@ class UiController:
     self.buttons.append(TextButton(pos[1], "Quacker", size[1], colors, (255,0,0), (True, True), lambda:self.setTarget(1)))
     self.buttons.append(TextButton(pos[2], "News", size[2], colors, (255,0,0), (True, True), lambda:self.setTarget(2)))
     self.buttons.append(TextButton(pos[3], "Store", size[3], colors, (255,0,0), (True, True), lambda:self.setTarget(3)))
+    
     # Setup status display
     self.statDisplay = Status(self.gameCon, (10,10), (320,30))
+
     # Setup pages
-    self.pages.append(ProfilePage(self.screen, self.playableArea))
-    self.pages.append(Quacker(self.screen, self.playableArea))
-    self.pages.append(News(self.screen, self.playableArea))
-    self.pages.append(Store(self.screen, self.playableArea))
+    self.pages.append(ProfilePage(self.screen, self.playableArea, self.gameCon))
+    self.pages.append(Quacker(self.screen, self.playableArea, self.gameCon))
+    self.pages.append(News(self.screen, self.playableArea, self.gameCon))
+    self.pages.append(Store(self.screen, self.playableArea, self.gameCon))
 
   def setTarget(self, target):
     self.pageTarget = target

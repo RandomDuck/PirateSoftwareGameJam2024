@@ -57,13 +57,13 @@ while running:
     # Fill the window with teal
     screen.fill((0, 100, 100))
 
-    # Render game controllers
-    UiController.render(events)
-    SettingCon.render(events)
-
     # Render splash screen
     if SplScr.shouldDisplaySplash():
       SplScr.render()
+    else:
+      # Render game controllers
+      UiController.render(events)
+      SettingCon.render(events)
 
     # flip() the display to put your work on screen
     pygame.display.flip()

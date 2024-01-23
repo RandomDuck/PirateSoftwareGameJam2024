@@ -44,6 +44,7 @@ class SplashScreen:
     self.endTime = pygame.time.get_ticks() + (wait * 1000)
     self.wait = wait
     self.splash = pygame.transform.scale(self.org_icon_image, self.getSplashSize())
+    self.shouldRender = True
 
   def getSplashSize(self):
     screen_rect = self.screen.get_rect()
@@ -56,10 +57,11 @@ class SplashScreen:
     self.screen.blit(self.splash, (0,self.y))
 
   def shouldDisplaySplash(self):
-    currentTime = pygame.time.get_ticks()
-    if currentTime < self.endTime:
-      return True
-    return False
+    if self.shouldRender:
+      currentTime = pygame.time.get_ticks()
+      if currentTime < self.endTime:
+        self.shouldRender = False
+    return self.shouldRender
   
   def update(self):
     self.splash = pygame.transform.scale(self.org_icon_image, self.getSplashSize())

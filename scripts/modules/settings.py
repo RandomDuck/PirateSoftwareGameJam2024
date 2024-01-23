@@ -39,6 +39,13 @@ class SaveButton(settingsButton):
   def SaveGame(self):
     pass # TODO: add way to save game
 
+class ResetButton(settingsButton):
+  def __init__(self, screen, pos, size, color, text_color):
+    super().__init__(screen, pos, size, color, text_color, self.ResetGame, f'Reset')
+
+  def ResetGame(self):
+    pass # TODO: add way to reset game
+
 class QuitButton(settingsButton):
   def __init__(self, screen, pos, size, color, text_color):
     super().__init__(screen, pos, size, color, text_color, self.Quit, f'Quit')
@@ -66,7 +73,7 @@ class Settings:
   def getButtonsPos(self):
     pos = []
     lasty = (self.size[1]+20)
-    for i in range(0, 3):
+    for i in range(0, 4):
       pos.append(((self.pos[0]+5),lasty))
       lasty += (self.size[1]+10)
     return (pos, (self.size[0]-10, self.size[1]))
@@ -76,6 +83,7 @@ class Settings:
     (pos, size) = self.getButtonsPos()
     self.options["aspect"] = AspectButton(self.screen, pos[0], size, self.color, self.text_color)
     self.options["save"] = SaveButton(self.screen, pos[1], size, self.color, self.text_color)
+    self.options["reset"] = ResetButton(self.screen, pos[1], size, self.color, self.text_color)
     self.options["quit"] = QuitButton(self.screen, pos[2], size, self.color, self.text_color)
     self.CoverRect.height = (self.size[1] + 10) * (len(self.options) + 1)
   
@@ -105,4 +113,5 @@ class Settings:
     (pos, size) = self.getButtonsPos()
     self.options["aspect"].update(pos[0], size)
     self.options["save"].update(pos[1], size)
-    self.options["quit"].update(pos[2], size)
+    self.options["reset"].update(pos[2], size)
+    self.options["quit"].update(pos[3], size)

@@ -74,7 +74,6 @@ class Settings:
   def setup(self):
     self.button = btn(self.pos, "Settings", self.size, self.color, self.text_color, (True, True), self.toggle)
     (pos, size) = self.getButtonsPos()
-    print(pos)
     self.options["aspect"] = AspectButton(self.screen, pos[0], size, self.color, self.text_color)
     self.options["save"] = SaveButton(self.screen, pos[1], size, self.color, self.text_color)
     self.options["quit"] = QuitButton(self.screen, pos[2], size, self.color, self.text_color)

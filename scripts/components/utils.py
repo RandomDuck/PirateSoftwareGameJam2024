@@ -59,7 +59,7 @@ class SplashScreen:
   def shouldDisplaySplash(self):
     if self.shouldRender:
       currentTime = pygame.time.get_ticks()
-      if currentTime < self.endTime:
+      if currentTime >= self.endTime:
         self.shouldRender = False
     return self.shouldRender
   

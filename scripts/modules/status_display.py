@@ -19,12 +19,12 @@ class Status:
     (textColor, backgroundColor) = ((255,255,255), (130,90,130))
     textsize = 22
     textCentering = (True, False)
-    self.moral = Tb(pos[0], size[0], f'Moral: {self.gameCon.getMorality()}', textColor, backgroundColor, textCentering, textsize)
+    self.moral = Tb(pos[0], size[0], f'CPS: {self.gameCon.getClicksPerSecond()}', textColor, backgroundColor, textCentering, textsize)
     self.cash = Tb(pos[1], size[1], f'Cash: {self.gameCon.getCash()}', textColor, backgroundColor, textCentering, textsize)
     self.cred = Tb(pos[2], size[2], f'Cred: {self.gameCon.getCredibility()}', textColor, backgroundColor, textCentering, textsize)
   
   def updateText(self):
-    self.moral.text = f'Moral: {self.gameCon.getMorality()}'
+    self.moral.text = f'Moral: {self.gameCon.getClicksPerSecond()}'
     self.cash.text = f'Cash: {self.gameCon.getCash()}'
     self.cred.text = f'Cred: {self.gameCon.getCredibility()}'
   

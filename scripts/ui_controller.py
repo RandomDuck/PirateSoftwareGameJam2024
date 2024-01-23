@@ -48,7 +48,7 @@ class UiController:
     screen = self.screen
     
     # Ignore events if we cant be clicked
-    availableEvents = events if self.clickable else []
+    availableEvents = events if self.clickable else False
     
     # render playable area
     pygame.draw.rect(screen, (255,255,255), self.playableArea)
@@ -60,7 +60,7 @@ class UiController:
       
     # render bottom row buttons
     for button in self.buttons:
-      button.render(screen, availableEvents)
+      button.render(screen, events)
     
     # render stats hud
     self.statDisplay.render(screen)

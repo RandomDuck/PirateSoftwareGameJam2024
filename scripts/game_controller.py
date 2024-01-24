@@ -1,8 +1,9 @@
 class GameCon:
   def __init__(self, data = (0,0,0)):
     self.cash=data[0]
-    self.clicksPerSecond=data[1]
+    self.clicksPerSecond=data[1] #TODO: MAKE CPS do something
     self.credibility=data[2]
+    self.items = {}
 
   def getCash(self):
     return self.cash
@@ -24,6 +25,16 @@ class GameCon:
     self.clicksPerSecond = value
   def setCredibility(self, value):
     self.credibility = value
+
+  def makePurchase(self, cost, item):
+    canBuy = (self.getCash() - cost) >= 0
+    if canBuy:
+      if item["id"] in self.items:
+        self.items[item["id"]] += 1
+      else:
+        self.items[item["id"]] = 1
+      self.updateCash(-cost)
+      self.updateClicksPerSecond(item["cps"])
 
   def getData(self):
     return (self.data, self.clicksPerSecond, self.credibility)

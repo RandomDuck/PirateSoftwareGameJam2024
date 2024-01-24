@@ -24,7 +24,7 @@ class Status:
     self.cred = Tb(pos[2], size[2], f'Cred: {self.gameCon.getCredibility()}', textColor, backgroundColor, textCentering, textsize)
   
   def updateText(self):
-    self.moral.text = f'Moral: {self.gameCon.getClicksPerSecond()}'
+    self.moral.text = f'CPS: {self.gameCon.getClicksPerSecond()}'
     self.cash.text = f'Cash: {self.gameCon.getCash()}'
     self.cred.text = f'Cred: {self.gameCon.getCredibility()}'
   

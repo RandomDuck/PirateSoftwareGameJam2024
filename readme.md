@@ -33,3 +33,8 @@ Thanks to Thor for hosting this awesome jam and thanks to you for being here.
 
 #### Special thanks to:
 * ReelablePenny14 in the PiratSoftware discord for his help with button layout positions
+* Soap for existing in our discord
+* keanny_ for suggesting food fights
+
+#### Suggestions:
+* food related social media wars (FOOD FIGHT!!)

@@ -26,7 +26,9 @@ class GameCon:
   def setCredibility(self, value):
     self.credibility = value
 
-  def makePurchase(self, cost, item):
+  def makePurchase(self, item):
+    cost = item['cost']
+    cred = item['cred']
     canBuy = (self.getCash() - cost) >= 0
     if canBuy:
       if item["id"] in self.items:
@@ -34,6 +36,7 @@ class GameCon:
       else:
         self.items[item["id"]] = 1
       self.updateCash(-cost)
+      self.updateCredibility(-cred)
       self.updateClicksPerSecond(item["cps"])
 
   def getData(self):

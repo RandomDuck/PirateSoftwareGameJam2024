@@ -4,7 +4,7 @@ storeItems = [
     "title": "Default",
     "description": "A default store item",
     "cost": 10,
-    "cred": 0,
+    "follows": 0,
     "cps": 0.3,
     "iconPath": "resources/storeIcons/default.png"
   },
@@ -13,7 +13,7 @@ storeItems = [
     "title": "Botfarm",
     "description": "Hire bots to like your posts",
     "cost": 100,
-    "cred": -2,
+    "follows": -2,
     "cps": 0.3,
     "iconPath": "resources/storeIcons/default.png"
   }

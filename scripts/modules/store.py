@@ -3,7 +3,7 @@ from ..components.text import TextBox
 from ..components.store_Item import StoreItem
 from resources.datasets.storeItems import storeItems
 
-class Store(Page):
+class Store(Page):#TODO: make cred into followers
   def __init__(self, screen, area, gameCon):
     super().__init__(screen, area, gameCon)
     self.setup()

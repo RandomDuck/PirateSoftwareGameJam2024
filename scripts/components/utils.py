@@ -1,8 +1,10 @@
 import pygame
+import os
+import sys
 
 def setGameIcon():
   # Set game icon
-  image_path = "resources/icon.png"
+  image_path = resource_path("resources/icon.png")
   image_width, image_height = (128,128)
   icon_image = pygame.image.load(image_path)
   icon_image = pygame.transform.scale(icon_image, (image_width,image_height))
@@ -49,7 +51,7 @@ class timedEvents:
 class SplashScreen:
   def __init__(self, screen, wait = 3):
     self.screen = screen
-    image_path = "resources/jamSmall.png"
+    image_path = resource_path("resources/jamSmall.png")
     self.org_icon_image = pygame.image.load(image_path)
     image_width, image_height = self.org_icon_image.get_size()
     self.aspect = image_height / image_width
@@ -78,3 +80,13 @@ class SplashScreen:
   
   def update(self):
     self.splash = pygame.transform.scale(self.org_icon_image, self.getSplashSize())
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)

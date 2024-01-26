@@ -1,3 +1,4 @@
+from scripts.components.utils import resource_path
 storeItems = [
   {
     "id": 0,
@@ -6,7 +7,7 @@ storeItems = [
     "cost": 10,
     "follows": 0,
     "fps": 0.3,
-    "iconPath": "resources/storeIcons/default.png"
+    "iconPath": resource_path("resources/storeIcons/default.png")
   },
   {
     "id": 1,
@@ -15,7 +16,7 @@ storeItems = [
     "cost": 100,
     "follows": 0,
     "fps": 1,
-    "iconPath": "resources/storeIcons/default.png"
+    "iconPath": resource_path("resources/storeIcons/default.png")
   },
   {
     "id": 2,
@@ -24,7 +25,7 @@ storeItems = [
     "cost": 400,
     "follows": 0,
     "fps": 5,
-    "iconPath": "resources/storeIcons/default.png"
+    "iconPath": resource_path("resources/storeIcons/default.png")
   },
   {
     "id": 3,
@@ -33,7 +34,7 @@ storeItems = [
     "cost": 1200,
     "follows": 0,
     "fps": 30,
-    "iconPath": "resources/storeIcons/default.png"
+    "iconPath": resource_path("resources/storeIcons/default.png")
   }
 ]
 

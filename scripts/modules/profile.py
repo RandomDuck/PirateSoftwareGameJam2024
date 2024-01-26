@@ -1,6 +1,7 @@
 from ..components.page import Page
 from ..components.text import TextBox, Text
 from ..components.icon import IconBox
+from ..components.utils import resource_path
 
 class ProfilePage(Page):
   def __init__(self, screen, area, gameCon):
@@ -13,7 +14,7 @@ class ProfilePage(Page):
     self.cash = Text((self.pos[0]+120, self.pos[1]+100), (self.size[0]-130,30),f"Cash: {self.gameCon.getCash()}",(0,100,0),(True,False))
     self.follows = Text((self.pos[0]+120, self.pos[1]+130), (self.size[0]-130,30),f"Follows: {self.gameCon.getFollowers()}",(0,100,0),(True,False))
     self.fps = Text((self.pos[0]+120, self.pos[1]+160), (self.size[0]-130,30),f"Followers per second: {self.gameCon.getfollowersPerSecond()}",(0,100,0),(True,False))
-    self.icon = IconBox("resources/profile.png",(self.pos[0]+10, self.pos[1]+95), (100,100), (0,125,125), 5)
+    self.icon = IconBox(resource_path("resources/profile.png"),(self.pos[0]+10, self.pos[1]+95), (100,100), (0,125,125), 5)
     self.elements.append(self.banner)
     self.elements.append(self.user)
     self.elements.append(self.follows)

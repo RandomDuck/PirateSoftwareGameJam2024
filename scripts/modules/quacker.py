@@ -9,9 +9,15 @@ class Quacker(Page):
 
   def setup(self):
     self.banner = TextBox(self.pos,(self.size[0],30),"Quacker",(255,255,255),(255,0,0),(True,True))
-    self.post = TextButton((self.pos[0]+10, self.pos[1]+40),"Make post",(self.size[0]-20,60),((255,255,0),(255,0,0)),(100,100,100),(True,True), lambda:self.gameCon.updateCash(10))
+    self.post = TextButton((self.pos[0]+10, self.pos[1]+40),"Make post (+10 followers)",(self.size[0]-20,60),((255,255,0),(255,0,0)),(100,100,100),(True,True), lambda:self.gameCon.updateFollowers(10))
+    self.post = TextButton((self.pos[0]+10, self.pos[1]+40),"Post fake news (-10 follows, +20 cash)",(self.size[0]-20,60),((255,255,0),(255,0,0)),(100,100,100),(True,True), lambda:self.sellFollows())
     self.elements.append(self.banner)
     self.buttons.append(self.post)
+
+  def sellFollows(self):
+    if self.gameCon.getFollowers() >= 10:
+      self.gameCon.updateFollowers(-10)
+      self.gameCon.updateCash(20)
   
   def update(self, area):
     super().update(area)

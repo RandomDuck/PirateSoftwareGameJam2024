@@ -33,7 +33,7 @@ class UiController:
     self.buttons.append(TextButton(pos[3], "Store", size[3], colors, (255,0,0), (True, True), lambda:self.setTarget(3)))
     
     # Setup status display
-    self.statDisplay = Status(self.gameCon, (10,10), (320,30))
+    self.statDisplay = Status(self.gameCon, (10,10), (330,30))
 
     # Setup pages
     self.pages.append(ProfilePage(self.screen, self.playableArea, self.gameCon))

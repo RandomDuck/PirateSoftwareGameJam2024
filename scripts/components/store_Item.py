@@ -13,10 +13,10 @@ class StoreItem:
     self.description = Text(pos,size, self.itemData["description"], (255,255,255), (True,True), 22)
     cash = self.itemData['cost']
     follows = self.itemData['follows']
-    cps = self.itemData['cps']
+    fps = self.itemData['fps']
     self.costText = Text(pos,size, f"Cash: {'-' if cash > 0 else '' if cash == 0 else '+'}{cash if cash > 0 else -cash}", (255,255,255), (True,False), 22)
     self.followsText = Text(pos,size, f"follows: {'-' if follows > 0 else '' if follows == 0 else '+'}{follows if follows > 0 else -follows}", (255,255,255), (True,False), 22)
-    self.cpsText = Text(pos,size, f"CPS: {'+' if cps > 0 else '' if cps == 0 else '-'}{cps if cps > 0 else -cps}", (255,255,255), (True,False), 22)
+    self.fpsText = Text(pos,size, f"FPS: {'+' if fps > 0 else '' if fps == 0 else '-'}{fps if fps > 0 else -fps}", (255,255,255), (True,False), 22)
     self.icon = Icon(self.itemData["iconPath"], pos, size)
     self.setup()
 
@@ -40,7 +40,7 @@ class StoreItem:
         "pos": (self.pos[0]+65+(self.size[0]*nameWidth), self.pos[1]+20),
         "size": (self.size[0]*infoWidth,20)
       },
-      "cps": {
+      "fps": {
         "pos": (self.pos[0]+65+(self.size[0]*nameWidth), self.pos[1]+35),
         "size": (self.size[0]*infoWidth,20)
       },
@@ -58,7 +58,7 @@ class StoreItem:
     self.description.update(data["description"]["pos"], data["description"]["size"])
     self.followsText.update(data["follows"]["pos"], data["description"]["size"])
     self.costText.update(data["cost"]["pos"], data["description"]["size"])
-    self.cpsText.update(data["cps"]["pos"], data["description"]["size"])
+    self.fpsText.update(data["fps"]["pos"], data["description"]["size"])
     self.icon.update(data["icon"]["pos"], data["icon"]["size"])
 
 
@@ -71,7 +71,7 @@ class StoreItem:
     self.title.render(surface)
     self.description.render(surface)
     self.followsText.render(surface)
-    self.cpsText.render(surface)
+    self.fpsText.render(surface)
     self.costText.render(surface)
 
   def update(self, pos, size):

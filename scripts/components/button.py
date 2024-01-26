@@ -87,7 +87,7 @@ class IconButton(Button): # Renders a button with an icon
     self.icon = Icon(iconPath, iconP, iconS)
 
   def render(self, surface, events):
-    super().render(surface, events)
+    super().render(self, surface, events)
     self.icon.render(surface)
 
   def update(self, pos, size):

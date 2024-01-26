@@ -2,7 +2,7 @@ import pygame
 from scripts.ui_controller import UiController as UICon
 from scripts.game_controller import GameCon
 from scripts.modules.settings import Settings
-from scripts.components.utils import setGameIcon, fetchEvents, setGameName, SplashScreen
+from scripts.components.utils import setGameIcon, fetchEvents, setGameName, SplashScreen, timedEvents
 
 # pygame setup
 pygame.init()
@@ -17,6 +17,7 @@ gameCon = GameCon()
 UiController = UICon(screen, gameCon)
 settingCollors = ((160,160,160),(127,255,127))
 SettingCon = Settings(screen, (200,30), settingCollors, (0,0,255), UiController.setClickable)
+updateFPS = timedEvents(1,gameCon.useFPS)
 
 # Game setup
 def setup():
@@ -51,7 +52,8 @@ while running:
     if pygame.QUIT in events:
         # TODO: save game here too
         running = False
-
+        
+    updateFPS.updateEvent()
     # check if we need to handle options
     hande_options()
     # Fill the window with teal

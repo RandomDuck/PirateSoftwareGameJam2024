@@ -33,6 +33,19 @@ def fetchEvents():
       events.append(event.type)
   return events
 
+class timedEvents:
+  def __init__(self, wait, trigger=lambda:print("Triggerd event")):
+    self.endTime = pygame.time.get_ticks() + (wait * 1000)
+    self.wait = wait
+    self.trigger = trigger
+
+  def updateEvent(self):
+      currentTime = pygame.time.get_ticks()
+      if currentTime >= self.endTime:
+        self.trigger()
+        self.endTime = currentTime + (self.wait * 1000)
+
+
 class SplashScreen:
   def __init__(self, screen, wait = 3):
     self.screen = screen

@@ -63,6 +63,7 @@ class StoreItem:
 
 
   def purchase(self):
+    #cost * (self.items[item["id"]] * .5)
     self.gameCon.makePurchase(self.itemData)
 
   def render(self, surface, events):

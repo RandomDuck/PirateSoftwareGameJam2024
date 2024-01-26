@@ -43,7 +43,13 @@ def hande_options():
       aspect = newAspect
       pygame.display.set_mode(aspect)
       update()
-
+#TODO: Save Load and Reset functions
+#TODO: store items increments in cost
+#TODO: store items display ammount owned
+#TODO: Generate random fake news and posts in quacker and news
+#TODO: make profile display recent posts
+#TODO: icons for items
+#TODO: improve UI
 setup()
 while running:
     # poll for events

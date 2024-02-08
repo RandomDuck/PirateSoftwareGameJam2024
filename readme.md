@@ -7,7 +7,7 @@ Idea - Social media /fake news spreading missinformation<br>
 Goal - get more likes and klicks <br>
 Game type - klicker / resource manegeing game <br>
 Gameplay - good + bad options, spreading missinformation is the optimal path to gain success <br>
-Engine: Pygame <br>
+Engine: godot <br>
 Team name - DucksEntertainment
 
 ### Description:
@@ -30,6 +30,7 @@ This is a game made for Pirate Softwares 2024 game jam.
 It uses pygame as a game engine.
 Thanks to Thor for hosting this awesome jam and thanks to you for being here.
 </p>
+This is a rewrite in the godot engine
 
 #### Special thanks to:
 * ReelablePenny14 in the PiratSoftware discord for his help with button layout positions

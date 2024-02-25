@@ -7,7 +7,7 @@ Idea - Social media /fake news spreading missinformation<br>
 Goal - get more likes and klicks <br>
 Game type - klicker / resource manegeing game <br>
 Gameplay - good + bad options, spreading missinformation is the optimal path to gain success <br>
-Engine: Pygame <br>
+Engine: Flutter <br>
 Team name - DucksEntertainment
 
 ### Description:

@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:english_words/english_words.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:viral_hysteria/components/bigcard.dart';
 
@@ -13,50 +17,57 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-      child: MaterialApp(
-        title: 'Viral Hysteria',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        ),
-        home: MyHomePage(),
+      create: (context) => ThemeController(),
+      child: Consumer<ThemeController>(
+        builder: (context, state, _) {
+          return MaterialApp(
+            title: 'Viral Hysteria',
+            theme: ThemeData(
+              useMaterial3: true,
+              colorScheme: ColorScheme.fromSeed(seedColor: state.themeColor),
+            ),
+            home: TopPage(),
+          );
+        },
       ),
     );
   }
 }
 
-class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-
-  void getNext() {
-    current = WordPair.random();
-    notifyListeners();
-  }
-
-  var favorites = <WordPair>[];
-
-  void toggleFavorite() {
-    if (favorites.contains(current)) {
-      favorites.remove(current);
-    } else {
-      favorites.add(current);
+class ThemeController extends ChangeNotifier {
+  Color themeColor = Colors.green;
+  void newColorSeed(target) {
+    switch (target) {
+      case 0:
+        themeColor = Colors.green;
+      case 1:
+        themeColor = Colors.deepOrange;
+      case 2:
+        themeColor = Colors.blue;
+      case 3:
+        themeColor = Colors.blueGrey;
+      default:
+        themeColor = Colors.green;
     }
+
     notifyListeners();
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class TopPage extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TopPage> createState() => _TopPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TopPageState extends State<TopPage> {
   var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final themeController = Provider.of<ThemeController>(context);
     Widget page;
+    ThemeData theme = Theme.of(context);
+
     switch (selectedIndex) {
       case 0:
         page = BigCard(text: 'hello');
@@ -69,46 +80,51 @@ class _MyHomePageState extends State<MyHomePage> {
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
+
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
-        body: Column(
-          children: [
-            SafeArea(
-              child: NavigationRail(
-                extended: constraints.maxWidth >= 600,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: Icon(Icons.home),
-                    label: Text('Profile'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Quacker'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('News'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Store'),
-                  ),
-                ],
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (value) {
-                  setState(() {
-                    selectedIndex = value;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: Container(
-                color: Theme.of(context).colorScheme.primaryContainer,
+        body: Container(
+          color: theme.colorScheme.primaryContainer,
+          child: Column(
+            children: [
+              Row(),
+              Expanded(
                 child: page,
               ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: theme.colorScheme.onPrimaryContainer,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Profile',
+              backgroundColor: Colors.green,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bento),
+              label: 'Quacker',
+              backgroundColor: Colors.deepOrange,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.newspaper),
+              label: 'News',
+              backgroundColor: Colors.blue,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.storage),
+              label: 'Store',
+              backgroundColor: Colors.blueGrey,
             ),
           ],
+          currentIndex: selectedIndex,
+          onTap: (value) {
+            setState(() {
+              selectedIndex = value;
+              themeController.newColorSeed(value);
+            });
+          },
         ),
       );
     });

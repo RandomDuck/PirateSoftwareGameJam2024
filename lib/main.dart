@@ -1,11 +1,7 @@
-import 'dart:ui';
-
-import 'package:english_words/english_words.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:viral_hysteria/components/bigcard.dart';
+import 'package:viral_hysteria/modules/topbar.dart';
 
 void main() {
   runApp(MyApp());
@@ -87,7 +83,7 @@ class _TopPageState extends State<TopPage> {
           color: theme.colorScheme.primaryContainer,
           child: Column(
             children: [
-              Row(),
+              TopBar(),
               Expanded(
                 child: page,
               ),
@@ -103,7 +99,7 @@ class _TopPageState extends State<TopPage> {
               backgroundColor: Colors.green,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.bento),
+              icon: Icon(Icons.chat),
               label: 'Quacker',
               backgroundColor: Colors.deepOrange,
             ),

@@ -39,21 +39,19 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      MenuAnchor(
-        controller: menuCon,
-        menuChildren: settingsList,
-        child: TextButton.icon(
-            onPressed: () {
-              if (menuCon.isOpen) {
-                menuCon.close();
-              } else {
-                menuCon.open();
-              }
-            },
-            icon: Icon(Icons.settings),
-            label: Text('Settings')),
-      ),
-    ]);
+    return MenuAnchor(
+      controller: menuCon,
+      menuChildren: settingsList,
+      child: TextButton.icon(
+          onPressed: () {
+            if (menuCon.isOpen) {
+              menuCon.close();
+            } else {
+              menuCon.open();
+            }
+          },
+          icon: Icon(Icons.settings),
+          label: Text('Settings')),
+    );
   }
 }

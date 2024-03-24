@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:viral_hysteria/components/bigcard.dart';
+import 'package:viral_hysteria/modules/profile.dart';
 import 'package:viral_hysteria/modules/topbar.dart';
 
 void main() {
@@ -66,13 +67,31 @@ class _TopPageState extends State<TopPage> {
 
     switch (selectedIndex) {
       case 0:
-        page = BigCard(text: 'hello');
+        page = BigCard(
+          title: 'Profile',
+          child: Profile(),
+        );
       case 1:
-        page = Placeholder();
+        page = BigCard(
+          title: 'Quacker',
+          child: Placeholder(
+            color: Colors.white,
+          ),
+        );
       case 2:
-        page = Placeholder();
+        page = BigCard(
+          title: 'News',
+          child: Placeholder(
+            color: Colors.white,
+          ),
+        );
       case 3:
-        page = Placeholder();
+        page = BigCard(
+          title: 'Store',
+          child: Placeholder(
+            color: Colors.white,
+          ),
+        );
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }

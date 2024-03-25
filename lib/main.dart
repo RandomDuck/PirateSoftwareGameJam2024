@@ -38,10 +38,12 @@ class ThemeController extends ChangeNotifier {
       case 0:
         themeColor = Colors.green;
       case 1:
-        themeColor = Colors.deepOrange;
+        themeColor = Colors.purple;
       case 2:
-        themeColor = Colors.blue;
+        themeColor = Colors.deepOrange;
       case 3:
+        themeColor = Colors.blue;
+      case 4:
         themeColor = Colors.blueGrey;
       default:
         themeColor = Colors.green;
@@ -64,6 +66,8 @@ class _TopPageState extends State<TopPage> {
     final themeController = Provider.of<ThemeController>(context);
     Widget page;
     ThemeData theme = Theme.of(context);
+    bool hasDm = false;
+    Icon dmIcon = hasDm ? Icon(Icons.mark_unread_chat_alt) : Icon(Icons.chat);
 
     switch (selectedIndex) {
       case 0:
@@ -73,19 +77,26 @@ class _TopPageState extends State<TopPage> {
         );
       case 1:
         page = BigCard(
-          title: 'Quacker',
+          title: 'Direct messages',
           child: Placeholder(
             color: Colors.white,
           ),
         );
       case 2:
         page = BigCard(
-          title: 'News',
+          title: 'Quacker',
           child: Placeholder(
             color: Colors.white,
           ),
         );
       case 3:
+        page = BigCard(
+          title: 'News',
+          child: Placeholder(
+            color: Colors.white,
+          ),
+        );
+      case 4:
         page = BigCard(
           title: 'Store',
           child: Placeholder(
@@ -113,12 +124,17 @@ class _TopPageState extends State<TopPage> {
           selectedItemColor: theme.colorScheme.onPrimaryContainer,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.account_box),
               label: 'Profile',
               backgroundColor: Colors.green,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
+              icon: dmIcon,
+              label: 'DMs',
+              backgroundColor: Colors.purple,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.style),
               label: 'Quacker',
               backgroundColor: Colors.deepOrange,
             ),
@@ -128,7 +144,7 @@ class _TopPageState extends State<TopPage> {
               backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.storage),
+              icon: Icon(Icons.shopping_cart),
               label: 'Store',
               backgroundColor: Colors.blueGrey,
             ),
